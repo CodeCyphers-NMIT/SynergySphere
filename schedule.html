@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar - Synergy Sphere</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/schedule.css') }}">
+
+</head>
+<body>
+    <!-- Top Navigation -->
+    <nav class="navbar">
+        <div class="logo">Synergy Sphere</div>
+        
+        <ul class="nav-links">
+            <li><a href="/homepage" id="nav-home">Home</a></li>
+            <li><a href="/allprojects" id="nav-projects" class="active">Projects</a></li>
+            <li><a href="/schedule" id="nav-schedule">Schedule</a></li>
+            <li><a href="/messages" id="nav-messages">Messages</a></li>
+            <li><a href="/aboutus" id="nav-aboutus">About Us</a></li>
+        </ul>
+
+        <div class="user-actions">
+            <div class="profile-pic">JS</div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1>Personal Calendar</h1>
+            <p>Your personalized schedule with project deadlines and important dates</p>
+        </div>
+
+        <!-- Calendar Container -->
+        <div class="calendar-container">
+            <!-- Calendar Controls -->
+            <div class="calendar-controls">
+                <button class="calendar-nav" onclick="previousMonth()">‹ Previous</button>
+                <div class="current-month" id="currentMonth">September 2024</div>
+                <div class="view-controls">
+                    <button class="view-btn active" onclick="switchView('month')">Month</button>
+                    <button class="view-btn" onclick="switchView('week')">Week</button>
+                    <button class="view-btn" onclick="refreshFromDatabase()">🔄 Sync</button>
+                </div>
+                <button class="calendar-nav" onclick="nextMonth()">Next ›</button>
+            </div>
+
+            <!-- Calendar Grid -->
+            <div class="calendar-wrapper">
+                <div class="calendar-grid" id="calendarGrid">
+                    <!-- Calendar will be generated dynamically -->
+                </div>
+            </div>
+
+            <!-- Legend -->
+            <div class="calendar-legend">
+                <div class="legend-item">
+                    <div class="legend-color legend-today"></div>
+                    <span>Today</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color legend-deadline"></div>
+                    <span>Single Deadline</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color legend-multiple"></div>
+                    <span>Multiple Deadlines</span>
+                </div>
+                <div class="legend-item">
+                    <span>🔴 High Priority</span>
+                </div>
+                <div class="legend-item">
+                    <span>🟠 Medium Priority</span>
+                </div>
+                <div class="legend-item">
+                    <span>🟢 Low Priority</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Deadline Detail Modal -->
+    <div class="deadline-modal" id="deadlineModal">
+        <div class="deadline-modal-content">
+            <div class="deadline-modal-header">
+                <h3 id="modalDate">September 15, 2024</h3>
+                <button class="close-deadline-modal" onclick="closeDeadlineModal()">&times;</button>
+            </div>
+            <div id="deadlineDetails">
+                <!-- Deadline details will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Database Status -->
+    <div class="db-status connected" id="dbStatus">
+        Database Connected
+    </div>
+
+    <script src="{{ url_for('static', filename='js/schedule.js') }}"></script>
+</body>
+</html>

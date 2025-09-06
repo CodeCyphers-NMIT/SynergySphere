@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages - Synergy Sphere</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/messages.css') }}">
+</head>
+<body>
+    <!-- Top Navigation -->
+    <nav class="navbar">
+        <div class="logo">Synergy Sphere</div>
+        <ul class="nav-links">
+            <li><a href="/homepage" id="nav-home">Home</a></li>
+            <li><a href="/allprojects" id="nav-projects">Projects</a></li>
+            <li><a href="/schedule" id="nav-schedule">Schedule</a></li>
+            <li><a href="/messages" id="nav-messages" class="active">Messages</a></li>
+            <li><a href="/aboutus" id="nav-aboutus">About Us</a></li>
+        </ul>
+        <div class="user-actions">
+            <div class="profile-pic">JS</div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="page-header">
+            <h1>Messages</h1>
+            <p>View and send messages to your team members.</p>
+        </div>
+        <div class="messages-container">
+            <div class="chat-list">
+                <div class="chat-item active">
+                    <div class="chat-avatar">A</div>
+                    <div class="chat-info">
+                        <div class="chat-name">Alice Johnson</div>
+                        <div class="chat-preview">Hey, are we meeting today?</div>
+                    </div>
+                </div>
+                <div class="chat-item">
+                    <div class="chat-avatar">B</div>
+                    <div class="chat-info">
+                        <div class="chat-name">Bob Smith</div>
+                        <div class="chat-preview">Sent the files!</div>
+                    </div>
+                </div>
+                <div class="chat-item">
+                    <div class="chat-avatar">C</div>
+                    <div class="chat-info">
+                        <div class="chat-name">Carol Davis</div>
+                        <div class="chat-preview">Let's review the design.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="chat-window">
+                <div class="chat-header">Alice Johnson</div>
+                <div class="chat-messages">
+                    <div class="message received">
+                        <div class="message-text">Hey, are we meeting today?</div>
+                        <div class="message-time">09:15 AM</div>
+                    </div>
+                    <div class="message sent">
+                        <div class="message-text">Yes, let's meet at 11.</div>
+                        <div class="message-time">09:17 AM</div>
+                    </div>
+                </div>
+                <div class="chat-input">
+                    <input type="text" placeholder="Type a message..." />
+                    <button class="send-btn">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

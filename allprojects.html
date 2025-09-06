@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Projects - Synergy Sphere</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/allprojects.css') }}">
+
+</head>
+<body>
+    <!-- Top Navigation -->
+    <nav class="navbar">
+        <div class="logo">Synergy Sphere</div>
+        
+        <ul class="nav-links">
+    <li><a href="#" id="nav-home">Home</a></li>
+    <li><a href="#" id="nav-projects" class="active">Projects</a></li>
+    <li><a href="#" id="nav-schedule">Schedule</a></li>
+    <li><a href="#" id="nav-messages">Messages</a></li>
+    <li><a href="#" id="nav-aboutus">About Us</a></li>
+</ul>
+
+
+        <div class="user-actions">
+            <div class="profile-pic">JS</div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1>All Projects</h1>
+            <div class="search-container">
+                <input type="text" class="search-bar" placeholder="Search projects..." onkeyup="filterProjects()">
+            </div>
+        </div>
+
+        <!-- Projects Container -->
+        <div class="projects-container">
+            <div class="projects-grid" id="projectsGrid">
+                <!-- Projects will be dynamically generated -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Project Modal -->
+    <div class="project-modal" id="projectModal">
+        <div class="modal-container">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <div class="project-info">
+                    <h2 id="modalProjectTitle">Project Title</h2>
+                    <p id="modalProjectDesc">Project Description</p>
+                    <div class="team-members" id="modalTeamMembers">
+                        <!-- Team members will be populated here -->
+                    </div>
+                    <button class="add-member-btn" onclick="addTeamMember()">+ Add Member</button>
+                </div>
+                <button class="close-modal-btn" onclick="closeProjectModal()">&times;</button>
+            </div>
+
+            <!-- Modal Content -->
+            <div class="modal-content">
+                <!-- Navigation Tabs -->
+                <div class="nav-tabs">
+                    <a href="#" class="nav-tab active" onclick="switchTab('todolist')">📝 To-Do List</a>
+                    <a href="#" class="nav-tab" onclick="switchTab('tasks')">📋 Tasks</a>
+                    <a href="#" class="nav-tab" onclick="switchTab('calendar')">📅 Calendar</a>
+                </div>
+
+                <!-- Main Panel -->
+                <div class="main-panel">
+                    <!-- To-Do List View -->
+                    <div id="todolist-view" class="tab-content">
+                        <div class="todo-columns">
+                            <div class="todo-column" ondrop="drop(event)" ondragover="allowDrop(event)" data-status="new">
+                                <h3>📋 New Tasks</h3>
+                                <button class="add-task-btn" onclick="addNewTask()">+ Add Task</button>
+                                <div id="new-tasks">
+                                    <div class="todo-item" draggable="true" ondragstart="drag(event)">
+                                        <strong>Review AI Model</strong><br>
+                                        <small>Assigned to: Alice</small>
+                                    </div>
+                                    <div class="todo-item" draggable="true" ondragstart="drag(event)">
+                                        <strong>Update Documentation</strong><br>
+                                        <small>Assigned to: Bob</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="todo-column" ondrop="drop(event)" ondragover="allowDrop(event)" data-status="progress">
+                                <h3>🔄 In Progress</h3>
+                                <div id="progress-tasks">
+                                    <div class="todo-item" draggable="true" ondragstart="drag(event)">
+                                        <strong>Data Analysis</strong><br>
+                                        <small>Assigned to: Carol</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="todo-column" ondrop="drop(event)" ondragover="allowDrop(event)" data-status="completed">
+                                <h3>✅ Completed</h3>
+                                <div id="completed-tasks">
+                                    <div class="todo-item" draggable="true" ondragstart="drag(event)">
+                                        <strong>Initial Setup</strong><br>
+                                        <small>Completed by: David</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tasks Table View -->
+                    <div id="tasks-view" class="tab-content" style="display: none;">
+                        <button class="add-row-btn" onclick="addTaskRow()">+ Add New Task</button>
+                        <table class="tasks-table">
+                            <thead>
+                                <tr>
+                                    <th>S.No</th>
+                                    <th>Title</th>
+                                    <th>Assigned To</th>
+                                    <th>Description</th>
+                                    <th>Status</th>
+                                    <th>Due Date</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tasksTableBody">
+                                <tr>
+                                    <td>1</td>
+                                    <td>Review AI Model</td>
+                                    <td>Alice Johnson</td>
+                                    <td>Review the accuracy and performance of the AI model</td>
+                                    <td>New</td>
+                                    <td>2024-09-15</td>
+                                    <td>
+                                        <button class="action-btn edit-btn" onclick="editTask(this)">Edit</button>
+                                        <button class="action-btn delete-btn" onclick="deleteTask(this)">Delete</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Data Analysis</td>
+                                    <td>Carol Davis</td>
+                                    <td>Analyze the collected data and generate insights</td>
+                                    <td>In Progress</td>
+                                    <td>2024-09-20</td>
+                                    <td>
+                                        <button class="action-btn edit-btn" onclick="editTask(this)">Edit</button>
+                                        <button class="action-btn delete-btn" onclick="deleteTask(this)">Delete</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Calendar View -->
+                    <div id="calendar-view" class="tab-content" style="display: none;">
+                        <div class="calendar">
+                            <div class="calendar-header">
+                                <button class="calendar-nav" onclick="previousMonth()">&lt;</button>
+                                <h3 id="currentMonth">September 2024</h3>
+                                <button class="calendar-nav" onclick="nextMonth()">&gt;</button>
+                            </div>
+                            <div class="calendar-grid" id="calendarGrid">
+                                <!-- Calendar will be generated dynamically -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar Chat -->
+                <div class="sidebar-chat">
+                    <div class="chat-header">Team Chat</div>
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="message">
+                            <div class="message-author">Alice Johnson</div>
+                            <div class="message-time">10:30 AM</div>
+                            <div>Great progress on the AI model! 🚀</div>
+                        </div>
+                        <div class="message">
+                            <div class="message-author">Bob Smith</div>
+                            <div class="message-time">10:45 AM</div>
+                            <div>Updated the documentation as requested.</div>
+                        </div>
+                        <div class="message">
+                            <div class="message-author">Carol Davis</div>
+                            <div class="message-time">11:15 AM</div>
+                            <div>Working on the data analysis now.</div>
+                        </div>
+                    </div>
+                    <div class="chat-input">
+                        <input type="text" placeholder="Type a message..." onkeypress="sendMessage(event)">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="{{ url_for('static', filename='js/allprojects.js') }}"></script>
+<script>
+document.getElementById('nav-home').onclick = () => window.location.href = '/homepage';
+document.getElementById('nav-projects').onclick = () => window.location.href = '/allprojects';
+document.getElementById('nav-schedule').onclick = () => window.location.href = '/schedule';
+document.getElementById('nav-messages').onclick = () => window.location.href = '/messages';
+document.getElementById('nav-aboutus').onclick = () => window.location.href = '/aboutus';
+</script>
+
+</body>
+</html>

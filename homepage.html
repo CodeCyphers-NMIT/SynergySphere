@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synergy Sphere - Collaboration Platform</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/homepage.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/allprojects.css') }}">
+</head>
+<body>
+    <!-- Top Navigation -->
+    <!-- <nav class="navbar">
+        <div class="logo">Synergy Sphere</div>
+        
+        <ul class="nav-links">
+            <li><a href="#" class="active">📊 HomePage </a></li>
+            <li><a href="allprojects.html">📊 AllProjects </a></li>
+            <li><a href="#">💬 Messages</a></li>
+            <li><a href="schedule.html">📅 Schedule</a></li>
+            <li><a href="aboutus.html">ℹ️ About Us</a></li>
+        </ul>
+
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Search projects, people...">
+        </div>
+
+        <div class="user-actions">
+            <div class="notification-bell" onclick="toggleNotifications()">
+                🔔
+                <span class="notification-badge">3</span>
+            </div>
+            
+            <div class="profile-dropdown">
+                <div class="profile-pic" onclick="toggleProfileMenu()">JS</div>
+                <div class="dropdown-menu" id="profileMenu">
+                    <a href="#">⚙️ Settings</a>
+                    <a href="#">👤 Edit Profile</a>
+                    <a href="#">🚪 Logout</a>
+                </div>
+            </div>
+        </div>
+    </nav> -->
+    <nav class="navbar">
+        <div class="logo">Synergy Sphere</div>
+        
+        <ul class="nav-links">
+    <li><a href="{{ url_for('homepage') }}" class="active">📊 My Projects</a></li>
+    <li><a href="{{ url_for('allprojects') }}">📁 All Projects</a></li>
+    <li><a href="{{ url_for('messages') }}">💬 Messages</a></li>
+    <li><a href="{{ url_for('schedule') }}">📅 Schedule</a></li>
+    <li><a href="{{ url_for('aboutus') }}">ℹ️ About Us</a></li>
+</ul>
+
+
+        <div class="user-actions">
+            <div class="profile-pic">JS</div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Welcome Section -->
+        <section class="welcome-section">
+            <div class="welcome-content">
+                <h1>Welcome to Synergy Sphere</h1>
+                <p>Where collaboration meets innovation. Connect, create, and achieve together.</p>
+                <div class="cta-buttons">
+                    <a href="#" class="btn btn-primary" onclick="createProject()">🚀 Start New Project</a>
+                    <a href="#" class="btn btn-secondary" onclick="joinProject()">🤝 Join Project</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard -->
+        <section class="dashboard">
+            <div class="dashboard-grid">
+                <!-- Projects Section -->
+                <div class="projects-section">
+                    <h2 class="section-title">Recent Projects</h2>
+                    <p>Click a tile for overview and double click to work on project <br><br></p>
+                    <div class="projects-grid">
+                        <div class="project-card" onclick="showProjectModal('AI Research Hub', 'Collaborative AI research project focusing on machine learning algorithms', ['Alice Johnson', 'Bob Smith', 'Carol Davis'], ['Completed literature review', 'Implemented neural network', 'Updated dataset', 'Fixed bug in training loop', 'Added visualization tool'])">
+                            <div class="project-title">AI Research Hub</div>
+                            <div class="project-desc">Collaborative AI research project focusing on machine learning</div>
+                            <div class="project-meta">
+                                <span>👥 3 members</span>
+                                <span>📅 Due in 5 days</span>
+                            </div>
+                        </div>
+                        
+                        <div class="project-card" onclick="showProjectModal('Mobile App Design', 'Creating a user-friendly mobile application for task management', ['David Wilson', 'Eva Brown', 'Frank Miller'], ['Wireframe completion', 'UI mockups finalized', 'User testing conducted', 'Color scheme approved', 'Navigation flow optimized'])">
+                            <div class="project-title">Mobile App Design</div>
+                            <div class="project-desc">Creating a user-friendly mobile application for task management</div>
+                            <div class="project-meta">
+                                <span>👥 3 members</span>
+                                <span>📅 Due in 12 days</span>
+                            </div>
+                        </div>
+                        
+                        <div class="project-card" onclick="showProjectModal('Marketing Campaign 2024', 'Developing comprehensive marketing strategy for Q4 launch', ['Grace Lee', 'Henry Taylor'], ['Market research completed', 'Campaign budget approved', 'Creative assets designed', 'Social media strategy defined', 'Influencer partnerships established'])">
+                            <div class="project-title">Marketing Campaign 2024</div>
+                            <div class="project-desc">Developing comprehensive marketing strategy for Q4</div>
+                            <div class="project-meta">
+                                <span>👥 2 members</span>
+                                <span>📅 Due in 8 days</span>
+                            </div>
+                        </div>
+                        
+                        <div class="project-card" onclick="showProjectModal('Website Redesign', 'Complete overhaul of company website with modern design principles', ['Ivy Chen', 'Jack Anderson', 'Kate Roberts', 'Leo Martinez'], ['Content audit finished', 'New sitemap created', 'Design system established', 'Homepage redesigned', 'SEO optimization implemented'])">
+                            <div class="project-title">Website Redesign</div>
+                            <div class="project-desc">Complete overhaul of company website</div>
+                            <div class="project-meta">
+                                <span>👥 4 members</span>
+                                <span>📅 Due in 15 days</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="sidebar">
+                    <!-- Upcoming Deadlines -->
+                    <div class="widget">
+                        <h3 class="section-title">📅 Upcoming Deadlines</h3>
+                        <div class="deadline-item">
+                            <span>AI Research Presentation</span>
+                            <span class="deadline-date">Sep 11</span>
+                        </div>
+                        <div class="deadline-item">
+                            <span>App Prototype Demo</span>
+                            <span class="deadline-date">Sep 18</span>
+                        </div>
+                        <div class="deadline-item">
+                            <span>Marketing Review</span>
+                            <span class="deadline-date">Sep 14</span>
+                        </div>
+                    </div>
+
+                    <!-- Recent Messages -->
+                    <div class="widget">
+                        <h3 class="section-title">💬 To-do List</h3>
+                        <div class="message-item">
+                            <span>AI: Research Hub"<br>Finish front-end</span>
+                            <span class="message-time">15 sept</span>
+                        </div>
+                        <div class="message-item">
+                            <span>Mobile App Design"<br>Finish back end</span>
+                            <span class="message-time">20 sept</span>
+                        </div>
+                        <div class="message-item">
+                            <span>Website Design"<br>complete js file</span>
+                            <span class="message-time">10 sept</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Project Modal -->
+    <!-- <div class="modal" id="projectModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Project Title</h2>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <div id="modalDescription"></div>
+            <div class="team-members" id="modalMembers"></div>
+            <div class="recent-work">
+                <h4>🔄 Recent Activity</h4>
+                <div id="modalRecentWork"></div>
+            </div>
+        </div>
+    </div> -->
+
+    <!-- New Project Modal -->
+<div class="modal" id="newProjectModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Create New Project</h2>
+      <button class="close-btn" onclick="closeNewProjectModal()">&times;</button>
+    </div>
+    <form id="newProjectForm">
+      <label>Title:</label><br>
+      <input type="text" id="projectTitle" required><br><br>
+
+      <label>Description:</label><br>
+      <textarea id="projectDesc" required></textarea><br><br>
+
+      <label>Members (comma separated):</label><br>
+      <input type="text" id="projectMembers" required><br><br>
+
+      <button type="submit" class="btn btn-primary">Create Project</button>
+    </form>
+  </div>
+</div>
+
+
+    <script src="{{ url_for('static', filename='js/homepage.js') }}"></script>
+</body>
+</html>
